@@ -1,8 +1,11 @@
 import React from "react";
+import Header from "../Header/Header";
 
-const Pokedex= () => {
+const Pokedex= props => {
+    
     return(<div>
-        Pokedex
+        <Header titulo="Pokédex" button={["Voltar para lista de pokémons"]} path={["/"]}/>
+     
     </div>)
 };
 
