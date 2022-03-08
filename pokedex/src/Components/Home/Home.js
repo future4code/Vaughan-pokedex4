@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from "react";
 import {CardContainer, Card, ButtonContainer} from "./styled";
 import { useNavigate } from "react-router-dom";
+import Header from "../Header/Header";
 
 const Home= () => {
     const [pokemon, setPokemon]= useState([]);  
-    const navigate= useNavigate();
     useEffect(() => pegarPokemons(), []);
+    const navigate= useNavigate();
 
     const pegarPokemons= () => {
         const arrayDePokemons=[];
@@ -26,7 +27,7 @@ const Home= () => {
         navigate(`/detalhes_do_pokemon/${nome}`)
     }
 
-    const cardsDosPokemons= pokemon.length && pokemon.map((obj, index) => {
+    const cardsDosPokemons= pokemon.length === 0? "Carregando": pokemon.map((obj, index) => {
     
         return (
             <Card key={index}> 
@@ -44,9 +45,12 @@ const Home= () => {
     });
 
     return(
-        <CardContainer>
-            {cardsDosPokemons}
-        </CardContainer>
+        <>
+            <Header titulo="Lista de Pokémons" button={["Ir para Pokedex"]} path={["/pokedex"]}/>
+            <CardContainer>
+                {cardsDosPokemons}
+            </CardContainer>
+        </>
     )
 };
 
