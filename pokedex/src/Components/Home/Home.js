@@ -1,42 +1,57 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import {CardContainer, Card, ButtonContainer} from "./styled";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
+import Contexto from "../../Contexto/Contexto";
 
 const Home= () => {
     const [pokemon, setPokemon]= useState([]);  
-    useEffect(() => pegarPokemons(), []);
+    const [adicionados, adicionarPokemons]= useContext(Contexto);
+    useEffect(() => pegarPokemons(), [adicionados]);
     const navigate= useNavigate();
 
     const pegarPokemons= () => {
         const arrayDePokemons=[];
         const pokemons= number => `https://pokeapi.co/api/v2/pokemon/${number}`
+        const arrayId= [];
+
+        adicionados.forEach(({id}) => arrayId.push(id));
 
         for(let i= 1; i <= 20; i++){
+            
+            if(!arrayId.includes(i)){
 
-            arrayDePokemons.push(fetch(pokemons(i)).then(response => response.json()))
+                arrayDePokemons.push(fetch(pokemons(i)).then(response => response.json()))
+            }
+            
         }
-
+    
         Promise.all(arrayDePokemons)
             .then(obj => setPokemon(obj))
             .catch(error => console.log(error.response))
     };
-
+    
 
     const detalhes= nome => {
         navigate(`/detalhes_do_pokemon/${nome}`)
+    };
+
+    const addNaPokedex= (obj, index) => {
+        adicionarPokemons(obj);
+        pegarPokemons();
     }
 
-    const cardsDosPokemons= pokemon.length === 0? "Carregando": pokemon.map((obj, index) => {
+    const cardsDosPokemons= pokemon.length === 0? "Carregando": pokemon
+        .map((obj, index) => {
     
         return (
             <Card key={index}> 
                 
-                <img src={obj.sprites.front_default}/>
+                <img src={obj.sprites.front_default} alt={obj.name}/>
                 
                 <ButtonContainer>
 
-                    <button>Adicionar</button>
+                    <button onClick={() => addNaPokedex(obj, index)}>Adicionar</button>
                     <button onClick={() => detalhes(obj.name)}>Detalhes</button>
 
                 </ButtonContainer>
