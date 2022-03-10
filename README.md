@@ -1,16 +1,16 @@
 # POKEDEX
 
 Nome dos integrantes: 
-- Pessoa 1
-- Pessoa 2
-- Pessoa 3
+- Rodrigo Brito
+- Wellington Ferruccio da Gama Junior
+- Fábio Asada
 
 Link do Surge: www.link.com.br
 
 O que funciona:
-- Item 1
-- Item 2
+- Adicionar Pokémons na Pokedex.
+- Detalhes dos Pokémons.
+- Remover os Pokémons da Pokedex.
 
 O que não funciona: 
-- Item 3
-- Item 4
+- Os desafios
