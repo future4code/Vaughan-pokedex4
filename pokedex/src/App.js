@@ -8,7 +8,7 @@ function App() {
   const [adicionados, setAdicionados]= useState([]);
 
   const adicionarPokemons= pokemon => {
-    setAdicionados([...adicionados, pokemon])
+    setAdicionados(pokemon)
   }
 
   return (
