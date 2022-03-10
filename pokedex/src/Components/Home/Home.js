@@ -36,8 +36,8 @@ const Home= () => {
         navigate(`/detalhes_do_pokemon/${nome}`)
     };
 
-    const addNaPokedex= (obj, index) => {
-        adicionarPokemons(obj);
+    const addNaPokedex= (obj) => {
+        adicionarPokemons([...adicionados, obj]);
         pegarPokemons();
     }
 
@@ -51,7 +51,7 @@ const Home= () => {
                 
                 <ButtonContainer>
 
-                    <button onClick={() => addNaPokedex(obj, index)}>Adicionar</button>
+                    <button onClick={() => addNaPokedex(obj)}>Adicionar</button>
                     <button onClick={() => detalhes(obj.name)}>Detalhes</button>
 
                 </ButtonContainer>

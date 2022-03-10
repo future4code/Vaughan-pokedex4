@@ -13,21 +13,46 @@ const DetalhesDoPokemon= () => {
         setInfo([result])
     }
     
-    const informacoes= info.length === 0 ?"Carregando...": info.map(obj => {
+    const informacoes= info.length === 0 ?"Carregando...": info.map((obj, index) => {
         return(
-            <div>
+            <div key={index}>
                 <div>
-                    <img src={obj.sprites.front_default}/>
+                    <img src={obj.sprites.front_default} alt="Pokemon de frente"/>
 
-                    <img src={obj.sprites.back_default}/>
+                    <img src={obj.sprites.back_default} alt="Pokemon de costa"/>
+                </div>
+                
+                <div>
+                    <h1>Poderes</h1>
+
+                    <h3>hp: {obj.stats[0].base_stat}</h3>
+                    <h3>attack: {obj.stats[1].base_stat}</h3>
+                    <h3>defense: {obj.stats[2].base_stat}</h3>
+                    <h3>special-attack: {obj.stats[3].base_stat}</h3>
+                    <h3>special-defense: {obj.stats[4].base_stat}</h3>
+                    <h3>speed: {obj.stats[5].base_stat}</h3>
+
+
+                </div> 
+
+                <div>
+                    
+                    <h1>Espécie</h1>
+                    <h3>{obj.types.length === 1? 
+                        obj.types[0].type.name: 
+                        
+                            `${obj.types[0].type.name} - ${obj.types[1].type.name}`
+                        
+                        }</h3>
+                    
                 </div>
 
                 <div>
-                    <h1>Ataques</h1>
+                    <h1>Principais ataques</h1>
 
-                    {obj.moves.map(ataques => {
+                    {obj.moves.map((ataques, indice) => {
                         return(
-                            <h3>{ataques.move.name}</h3>
+                            <h3 key={indice}>{ataques.move.name}</h3>
                         )
                     })}
                     
