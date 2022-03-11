@@ -13,6 +13,7 @@ O que funciona:
 - Remover os Pokémons da Pokedex.
 - Detalhes dos Pokémons.
 - Em detalhes, fizemos uma pequena animação(carrossel) com o personagem. 
+- Fizemos a página de erro.
 
 O que não funciona: 
 - Os desafios
