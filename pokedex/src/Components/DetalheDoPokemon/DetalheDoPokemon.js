@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { Card, CardDetails, CardHeader, CardImg, CardSkills, CardText, ImageSlider, PokeImage } from "./styled";
 import { useParams } from "react-router-dom";
 import Header from "../Header/Header";
+import Loading from "../Loading/Loading";
 
 const DetalhesDoPokemon= () => {
     const [info, setInfo]= useState([])
@@ -13,57 +15,64 @@ const DetalhesDoPokemon= () => {
         setInfo([result])
     }
     
-    const informacoes= info.length === 0 ?"Carregando...": info.map((obj, index) => {
+    const informacoes= info.length === 0 ? <Loading/> : info.map((obj, index) => {
         return(
-            <div key={index}>
-                <div>
-                    <img src={obj.sprites.front_default} alt="Pokemon de frente"/>
+            <Card key={index}>
+                <CardImg>
+                    <CardHeader>
 
-                    <img src={obj.sprites.back_default} alt="Pokemon de costa"/>
-                </div>
-                
-                <div>
-                    <h1>Poderes</h1>
+                    <h1>{obj.name.charAt(0).toUpperCase() + obj.name.slice(1)}</h1>
 
-                    <h3>hp: {obj.stats[0].base_stat}</h3>
-                    <h3>attack: {obj.stats[1].base_stat}</h3>
-                    <h3>defense: {obj.stats[2].base_stat}</h3>
-                    <h3>special-attack: {obj.stats[3].base_stat}</h3>
-                    <h3>special-defense: {obj.stats[4].base_stat}</h3>
-                    <h3>speed: {obj.stats[5].base_stat}</h3>
-
-
-                </div> 
-
-                <div>
-                    
-                    <h1>Espécie</h1>
-                    <h3>{obj.types.length === 1? 
-                        obj.types[0].type.name: 
+                    <p>{obj.types.length === 1? 
+                        obj.types[0].type.name.charAt(0).toUpperCase() + obj.types[0].type.name.slice(1): 
                         
-                            `${obj.types[0].type.name} - ${obj.types[1].type.name}`
+                            `${obj.types[0].type.name.charAt(0).toUpperCase() + obj.types[0].type.name.slice(1)} - 
+                            ${obj.types[1].type.name.charAt(0).toUpperCase() + obj.types[1].type.name.slice(1)}`
                         
-                        }</h3>
-                    
-                </div>
+                        }</p>
 
-                <div>
-                    <h1>Principais ataques</h1>
-
-                    {obj.moves.map((ataques, indice) => {
-                        return(
-                            <h3 key={indice}>{ataques.move.name}</h3>
-                        )
-                    })}
+                    </CardHeader>
                     
-                </div>
-            </div>
+
+                    <PokeImage>
+                        <ImageSlider>
+                            <img src={obj.sprites.front_default} alt="Pokemon de frente"/>
+                            <img src={obj.sprites.back_default} alt="Pokemon de costa"/>
+                        </ImageSlider>                        
+                    </PokeImage>                    
+                </CardImg>
+
+                <CardText>
+
+                    <CardDetails>
+                        <h3>- Status</h3>
+                        <p><b>HP:</b> {obj.stats[0].base_stat}</p>
+                        <p><b>Attack:</b> {obj.stats[1].base_stat}</p>
+                        <p><b>Defense:</b> {obj.stats[2].base_stat}</p>
+                        <p><b>S-Attack:</b> {obj.stats[3].base_stat}</p>
+                        <p><b>S-Defense:</b> {obj.stats[4].base_stat}</p>
+                        <p><b>Speed:</b> {obj.stats[5].base_stat}</p>
+                    </CardDetails>
+
+                    <CardSkills>
+                        <h3>- Habilidades</h3>
+
+                        {obj.moves.map((ataques, indice) => {
+                            return(
+                                indice < 5 && <p>{ataques.move.name.charAt(0).toUpperCase() + ataques.move.name.slice(1).replace(/-/,' ')}</p>
+                            )
+                        })}
+                        
+                    </CardSkills>
+
+                </CardText>
+            </Card>
         )
     })
     
     return(
         <div>
-            <Header titulo="" button={["Voltar", "Ir para Pokédex"]} path={["/", "/pokedex"]}/>
+            <Header titulo="" button={["Ir para Lista", "Ir para Pokédex"]} path={["/", "/pokedex"]} />
             {informacoes}
         </div>
     )

@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import Background from '../../Media/background.png'
 
-export const BodyErro = styled.div`
+export const LoadingBody = styled.div`
+    margin-top: -15px;
     min-height: 100vh;
     background-image: url(${Background});
     background-size: cover;
@@ -10,14 +11,14 @@ export const BodyErro = styled.div`
     align-items: center;
 `
 
-export const ErroCard = styled.div`
+export const LoadingCard = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
->p{
-    margin: 10px;
+>h2{
+    margin-bottom: -40px;
 }
 >img{
-    width: 35%;
+    width: 30%;
 }
 `
