@@ -1,8 +1,9 @@
 import React, {useState, useEffect, useContext} from "react";
-import {CardContainer, Card, ButtonContainer} from "./styled";
+import {CardContainer, Card, ButtonContainer, Body} from "./styled";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import Contexto from "../../Contexto/Contexto";
+import Loading from "../Loading/Loading";
 
 const Home= () => {
     const [pokemon, setPokemon]= useState([]);  
@@ -41,11 +42,13 @@ const Home= () => {
         pegarPokemons();
     }
 
-    const cardsDosPokemons= pokemon.length === 0? "Carregando": pokemon
+    const cardsDosPokemons= pokemon.length === 0? <Loading/>: pokemon
         .map((obj, index) => {
     
         return (
-            <Card key={index}> 
+            <Card key={index}>
+
+                <p>{obj.name.charAt(0).toUpperCase() + obj.name.slice(1)}</p> 
                 
                 <img src={obj.sprites.front_default} alt={obj.name}/>
                 
@@ -60,12 +63,12 @@ const Home= () => {
     });
 
     return(
-        <>
+        <Body>
             <Header titulo="Lista de Pokémons" button={["Ir para Pokedex"]} path={["/pokedex"]}/>
             <CardContainer>
                 {cardsDosPokemons}
             </CardContainer>
-        </>
+        </Body>
     )
 };
 

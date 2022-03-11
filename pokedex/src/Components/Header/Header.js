@@ -1,5 +1,5 @@
 import React from "react";
-import {Li} from "./styled";
+import {Li, ButtonList, HeaderBody} from "./styled";
 import { useNavigate } from "react-router-dom";
 
 const Header= (props) => {
@@ -10,14 +10,14 @@ const Header= (props) => {
     }
     
     return(
-        <div>
+        <HeaderBody>
             <h1>{props.titulo}</h1>
-            <ul>
+            <ButtonList>
                 {props.button.map((texto, index) => {
                     return (<Li onClick={() => navegar(props.path[index])} key={index}>{texto}</Li>)
                 })}
-            </ul>
-        </div>
+            </ButtonList>
+        </HeaderBody>
     )
 };
 
